@@ -23,13 +23,22 @@ app.use(cors())
 app.post('/verifyReceipt', async (req, res) => {
     console.log('Receipt verification active')
 
-    const resp = await fetch('https://webmonetization.org/api/receipts/verify', {
-        method: 'POST',
-        body: req.body.receipt
-    })
-    const { amount } = await resp.json()
-    console.log('Received ' + amount)
-
+    let resp
+    let respJson
+    try {
+        resp = await fetch('https://webmonetization.org/api/receipts/verify', {
+            method: 'POST',
+            body: req.body.receipt
+        })
+        respJson = await resp.json()
+        // const { amount } = await resp.json()
+        const { amount } = respJson
+        console.log('Received ' + amount)
+    } catch (error) {
+        console.log('RESPONSE = ', resp)
+        console.log('RESPONSE JSON = ', respJson)
+        console.log('RESPONSE ERROR = ', error)
+    }
     // backend logic for new paid amount
     res.send('ok')
 })
@@ -84,7 +93,7 @@ app.get('/', function (req, res, next) {
         asUrl.pathname = asUrl.pathname === '/' ? '/.well-known/pay' : asUrl.pathname
 
         console.log('asUrl.href', asUrl.href)
-        
+
         // redirect to our chosen payment pointer so they get paid
         res.redirect(302, asUrl.href)
     } else {
