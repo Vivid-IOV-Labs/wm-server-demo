@@ -34,11 +34,12 @@
       document.monetization.addEventListener('monetizationprogress', async event => {
         // A payment has been received.
         console.log('A payment has been received.')
-        // console.log(event.detail.receipt)
+        console.log(event.detail.receipt)
 
         // Connect to your site’s backend to validate the payment. This does NOT connect directly to the receipt verifier.
         // const res = await fetch('/verifyReceipt', {
-        const res = await fetch('/verifyReceipt', {
+        try {
+          const res = await fetch('/verifyReceipt', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -47,10 +48,12 @@
             receipt: event.detail.receipt
           })
         })
+      } catch(error) {
+        console.log(error)
+      }
       })
     }
   </script>
-
 
   <!-- <script>
     // Define your revenue share here.

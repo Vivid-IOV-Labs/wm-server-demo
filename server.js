@@ -6,6 +6,9 @@ var path = require('path');
 const fetch = require("node-fetch");
 var cors = require('cors')
 
+const pickPointerSmartContract = require('./revenueSharing')
+
+
 app.set('view engine', 'ejs')
 
 app.use(express.json());
@@ -13,7 +16,8 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(cors())
 
-
+// Use smartContract or not to pick payment pointers.
+const useSmartContract = true
 
 // app.get('/', function (req, res) {
 //     res.render('index');
@@ -23,22 +27,13 @@ app.use(cors())
 app.post('/verifyReceipt', async (req, res) => {
     console.log('Receipt verification active')
 
-    let resp
-    let respJson
-    try {
-        resp = await fetch('https://webmonetization.org/api/receipts/verify', {
-            method: 'POST',
-            body: req.body.receipt
-        })
-        respJson = await resp.json()
-        // const { amount } = await resp.json()
-        const { amount } = respJson
-        console.log('Received ' + amount)
-    } catch (error) {
-        console.log('RESPONSE = ', resp)
-        console.log('RESPONSE JSON = ', respJson)
-        console.log('RESPONSE ERROR = ', error)
-    }
+    const resp = await fetch('https://webmonetization.org/api/receipts/verify', {
+        method: 'POST',
+        body: req.body.receipt
+    })
+    const { amount } = await resp.json()
+    console.log('Received ' + amount)
+
     // backend logic for new paid amount
     res.send('ok')
 })
@@ -77,14 +72,18 @@ function pickPointer() {
 
 // NOTE: If you wan to have separetly the frontend and the backend (2 instances), you need to use app.get('/') instead of app.use()
 
-app.get('/', function (req, res, next) {
+app.get('/', async function (req, res, next) {
     // is this request meant for Web Monetization?
 
     if (req.header('accept').includes('application/spsp4+json')) {
         console.log('Revenue sharing active')
 
         // choose our random payment pointer
-        const pointer = pickPointer()
+        if (useSmartContract) {
+            var pointer = await pickPointerSmartContract.pointer
+        } else {
+            var pointer = pickPointer()
+        }
 
 
         // turn the payment pointer into a URL in accordance with the payment pointer spec
@@ -102,10 +101,6 @@ app.get('/', function (req, res, next) {
         next()
     }
 })
-
-
-
-
 
 
 const PORT = process.env.PORT || 1337;
