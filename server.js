@@ -32,11 +32,19 @@ app.post('/verifyReceipt', async (req, res) => {
         method: 'POST',
         body: req.body.receipt
     })
-    const { amount } = await resp.json()
-    console.log('Received ' + amount)
-
+    var response = resp
+    try {
+        // const { amount } = await resp.json()
+        const response = await resp.json()
+        console.log('Received ' + response)
+        res.send({message: 'ok', response: response})
+    } catch (error) {
+        console.log('RESPONSE: ', response)
+        console.log('ERROR: ', error)
+        res.status(400).send(error)
+    }
     // backend logic for new paid amount
-    res.send('ok')
+    
 })
 
 
@@ -85,7 +93,7 @@ app.get('/', async function (req, res, next) {
         } else {
             var pointer = pickPointer()
         }
-        
+
         console.log('Payment pointer = ', pointer)
 
         // turn the payment pointer into a URL in accordance with the payment pointer spec
