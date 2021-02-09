@@ -5,6 +5,7 @@ var app = express();
 var path = require('path');
 const fetch = require("node-fetch");
 var cors = require('cors')
+require('dotenv').config()
 
 const pickPointerSmartContract = require('./revenueSharing')
 
@@ -17,12 +18,12 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 // Use smartContract or not to pick payment pointers.
-const useSmartContract = true
-
-// app.get('/', function (req, res) {
-//     res.render('index');
-// });
-
+const useSmartContract = process.env.USE_SMART_CONTRACT
+if (useSmartContract) {
+    console.log('Using smart contract for revenue sharing')
+} else {
+    console.log('Not using smart contract for revenue sharing')
+}
 
 app.post('/verifyReceipt', async (req, res) => {
     console.log('Receipt verification active')
@@ -70,7 +71,7 @@ function pickPointer() {
     }
 }
 
-// NOTE: If you wan to have separetly the frontend and the backend (2 instances), you need to use app.get('/') instead of app.use()
+// NOTE: If you want to have separetly the frontend and the backend (2 instances), you need to use app.get('/') instead of app.use()
 
 app.get('/', async function (req, res, next) {
     // is this request meant for Web Monetization?
@@ -84,14 +85,13 @@ app.get('/', async function (req, res, next) {
         } else {
             var pointer = pickPointer()
         }
-
+        
+        console.log('Payment pointer = ', pointer)
 
         // turn the payment pointer into a URL in accordance with the payment pointer spec
         // https://paymentpointers.org/
         const asUrl = new URL(pointer.startsWith('$') ? 'https://' + pointer.substring(1) : pointer)
         asUrl.pathname = asUrl.pathname === '/' ? '/.well-known/pay' : asUrl.pathname
-
-        console.log('asUrl.href', asUrl.href)
 
         // redirect to our chosen payment pointer so they get paid
         res.redirect(302, asUrl.href)
