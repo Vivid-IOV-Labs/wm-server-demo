@@ -37,13 +37,10 @@ if (useReceiptVerification) {
 
 
 app.post('/verifyReceipt', async (req, res) => {
-  console.log('Receipt verification active')
-
   const resp = await fetch('https://webmonetization.org/api/receipts/verify', {
     method: 'POST',
     body: req.body.receipt
   })
-  var response = resp
   try {
     const { amount } = await resp.json()
     console.log('Received ' + amount)
