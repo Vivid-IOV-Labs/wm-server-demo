@@ -21,14 +21,14 @@
   <!-- <meta name="monetization" content="$ilp.uphold.com/fH9eZNdYQ64F"> -->
 
   <!-- <meta name="monetization" content="$localhost:1337/">   -->
-  <meta name="monetization" content="https://web-monetization-server-test.herokuapp.com/">  
-  <!-- <meta name="monetization" content="$revshare.peerkat.live">   -->
+  <!-- <meta name="monetization" content="https://web-monetization-server-test.herokuapp.com/">   -->
+  <!-- <meta name="monetization" content="https://revsharetest.peerkat.live/">   -->
+  <meta name="monetization" content="$revshare.peerkat.live">  
 
   <!-- <meta name="monetization" content="https://webmonetization.org/api/receipts/%24ilp.uphold.com%2FfH9eZNdYQ64F"> -->
   <!-- <meta name="monetization" content="https://receipt-verifier.example/%24wallet.example%2Falice"> -->
 
   <script>
-    // console.log(encodeURIComponent('$ilp.uphold.com/fH9eZNdYQ64F'))
 
     if (document.monetization) {
       document.monetization.addEventListener('monetizationprogress', async event => {
@@ -39,7 +39,7 @@
         // Connect to your site’s backend to validate the payment. This does NOT connect directly to the receipt verifier.
         // const res = await fetch('/verifyReceipt', {
         try {
-          const res = await fetch('https://web-monetization-server-test.herokuapp.com/verifyReceipt', {
+          const res = await fetch('https://revsharetest.peerkat.live/verifyReceipt', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
