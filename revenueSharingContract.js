@@ -1,7 +1,5 @@
 // Rinkeby
-const address = "0xD6024cccBE557B62AB530D4Ce990427b2C38e212";
-// Thundercore
-// const address = "0x28f1Af96138896b0c2F61a728C1c6EA61e43e77a"
+const address = "0xD3F84d9481F7399E78Ca94D07568e906C97c2e6d";
 const ABI = [
 	{
 		inputs: [
@@ -33,6 +31,30 @@ const ABI = [
 		type: "function"
 	},
 	{
+		inputs: [],
+		stateMutability: "nonpayable",
+		type: "constructor"
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{
+				indexed: true,
+				internalType: "address",
+				name: "previousOwner",
+				type: "address"
+			},
+			{
+				indexed: true,
+				internalType: "address",
+				name: "newOwner",
+				type: "address"
+			}
+		],
+		name: "OwnershipTransferred",
+		type: "event"
+	},
+	{
 		inputs: [
 			{
 				internalType: "uint256",
@@ -49,6 +71,51 @@ const ABI = [
 			}
 		],
 		stateMutability: "nonpayable",
+		type: "function"
+	},
+	{
+		inputs: [
+			{
+				internalType: "address",
+				name: "newOwner",
+				type: "address"
+			}
+		],
+		name: "transferOwnership",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function"
+	},
+	{
+		inputs: [],
+		name: "_owner",
+		outputs: [
+			{
+				internalType: "address",
+				name: "",
+				type: "address"
+			}
+		],
+		stateMutability: "view",
+		type: "function"
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256",
+				name: "index",
+				type: "uint256"
+			}
+		],
+		name: "checkDataContains",
+		outputs: [
+			{
+				internalType: "bool",
+				name: "",
+				type: "bool"
+			}
+		],
+		stateMutability: "view",
 		type: "function"
 	},
 	{
