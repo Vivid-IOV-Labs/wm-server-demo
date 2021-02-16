@@ -1,13 +1,8 @@
 // Rinkeby
-const address = "0xD3F84d9481F7399E78Ca94D07568e906C97c2e6d";
+const address = "0x99deC650eb882c522ef49a5002Ff11fEdF5A146c";
 const ABI = [
 	{
 		inputs: [
-			{
-				internalType: "uint256",
-				name: "key",
-				type: "uint256"
-			},
 			{
 				internalType: "string",
 				name: "paymentPointerName",
