@@ -1,5 +1,3 @@
-// Rinkeby
-const address = "0x99deC650eb882c522ef49a5002Ff11fEdF5A146c";
 const ABI = [
 	{
 		inputs: [
@@ -203,6 +201,5 @@ const ABI = [
 ]
 
 module.exports = {
-  address: address,
   ABI: ABI
 };

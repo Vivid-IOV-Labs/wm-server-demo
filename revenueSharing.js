@@ -1,11 +1,10 @@
-require('dotenv').config()
+const config = require('./config')
 const util = require('util')
 const Web3 = require('web3');
-const provider = `wss://rinkeby.infura.io/ws/v3/${process.env.INFURA_KEY}`
-var web3 = new Web3(provider);
-const revenueSharingContract = require('./revenueSharingContract')
+var web3 = new Web3(config.smartContract.provider);
+const { ABI } = require(config.smartContract.abiFilePath)
 
-var contract = new web3.eth.Contract(revenueSharingContract.ABI, revenueSharingContract.address)
+var contract = new web3.eth.Contract(ABI, config.smartContract.address)
 
 const _pointer = async (useReceiptVerification) => {
   var totalPercentage = await contract.methods.getTotalPercentage().call()
@@ -13,8 +12,7 @@ const _pointer = async (useReceiptVerification) => {
   var pointer = await contract.methods.pickPointer(randomNum).call()
   
   if (useReceiptVerification) {
-    const receiptVerifierService = 'https://webmonetization.org/api/receipts/'
-    pointer = receiptVerifierService + encodeURIComponent(pointer)
+    pointer = config.receiptVerification.service + encodeURIComponent(pointer)
   }
   return pointer
 }

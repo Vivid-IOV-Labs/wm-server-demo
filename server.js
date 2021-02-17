@@ -5,27 +5,28 @@ var app = express();
 var path = require('path');
 const fetch = require("node-fetch");
 var cors = require('cors')
-require('dotenv').config()
+const config = require('./config')
+const pointers = require(config.paymentPointersPath)
 
 app.set('view engine', 'ejs')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
-const PORT = process.env.PORT || 1337;
+const PORT = config.server.port;
 app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`);
 });
 
-const useSmartContract = (process.env.USE_SMART_CONTRACT == 'true') 
-const useReceiptVerification = (process.env.USE_RECEIPT_VERIFICATION == 'true')
+const useSmartContract = (config.useSmartContract == 'true') 
+const useReceiptVerification = (config.useReceiptVerification == 'true')
 const pickPointerSmartContract = require('./revenueSharing')
 
 // Use smartContract or not to pick payment pointers.
 if (useSmartContract) {
-  console.log('Using smart contract for revenue sharing')
+  console.log('Smart contract: Activated')
 } else {
-  console.log('Not using smart contract for revenue sharing')
+  console.log('Smart contract: Deactivated')
 }
 
 // Use receipt verification or not.
@@ -37,7 +38,7 @@ if (useReceiptVerification) {
 
 
 app.post('/verifyReceipt', async (req, res) => {
-  const resp = await fetch('https://webmonetization.org/api/receipts/verify', {
+  const resp = await fetch(config.receiptVerification.verifier, {
     method: 'POST',
     body: req.body.receipt
   })
@@ -52,47 +53,17 @@ app.post('/verifyReceipt', async (req, res) => {
 
 })
 
-
-// Define your revenue share here.
-// If these weights add to 100 then they represent the percentage each pointer gets.
-const pointers = {
-  // Euro
-  '$ilp.uphold.com/BzR2nf3Yiyak': 20,
-  // USD
-  '$ilp.uphold.com/pNAg9yAgHXZD': 40,
-  // Pounds
-  '$ilp.uphold.com/MXhL7Ub9XQeQ': 10,
-  // Bitcoin
-  '$ilp.uphold.com/3eYm4dKzX4hU': 10,
-  // XRP
-  '$ilp.uphold.com/fH9eZNdYQ64F': 20,
-}
-
-const pointersForReceipt = {
-  // Euro
-  'https://webmonetization.org/api/receipts/%24ilp.uphold.com%2FBzR2nf3Yiyak': 20, //receipt
-  // USD
-  'https://webmonetization.org/api/receipts/%24ilp.uphold.com%2FpNAg9yAgHXZD': 40, //receipt
-  // Pounds
-  'https://webmonetization.org/api/receipts/%24ilp.uphold.com%2FMXhL7Ub9XQeQ': 10, //receipt
-  // Bitcoin
-  'https://webmonetization.org/api/receipts/%24ilp.uphold.com%2F3eYm4dKzX4hU': 10, //receipt
-  // XRP
-  'https://webmonetization.org/api/receipts/%24ilp.uphold.com%2FfH9eZNdYQ64F': 20, //receipt
-}
-
 // this is the same `pickPointer()` function implemented in the previous snippet
 function pickPointer() {
   const sum = Object.values(pointers).reduce((sum, weight) => sum + weight, 0)
   let choice = Math.random() * sum
 
-  if (useReceiptVerification) {
-    pointers = pointersForReceipt
-  }
-
-  for (const pointer in pointers) {
+  for (var pointer in pointers) {
     const weight = pointers[pointer]
     if ((choice -= weight) <= 0) {
+      if (useReceiptVerification) {
+        pointer = config.receiptVerification.service + encodeURIComponent(pointer)
+      }
       return pointer
     }
   }
@@ -128,4 +99,3 @@ app.get('/', async function (req, res, next) {
     next()
   }
 })
-
