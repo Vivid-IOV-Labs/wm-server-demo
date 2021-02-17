@@ -7,6 +7,7 @@ const ABI = require(config.smartContract.abiFilePath)
 
 const _pointer = async (useReceiptVerification) => {
   var contract = new web3.eth.Contract(ABI, config.smartContract.address)
+  
   try {
     var totalPercentage = await contract.methods.getTotalPercentage().call()
   } catch (error) {
@@ -15,11 +16,11 @@ const _pointer = async (useReceiptVerification) => {
   }
   
   var randomNum = parseInt(Math.random() * totalPercentage)
-  
   try {
     var pointer = await contract.methods.pickPointer(randomNum).call()
   } catch (error) {
     console.log('Pick pointer error')
+    console.log('Random Num = ', randomNum)
     console.log(error)
   }
 
@@ -28,8 +29,6 @@ const _pointer = async (useReceiptVerification) => {
   }
 
   return pointer
-
-
 }
 
 module.exports = (useReceiptVerification) => {
