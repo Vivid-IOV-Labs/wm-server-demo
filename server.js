@@ -18,7 +18,7 @@ app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`);
 });
 
-const useSmartContract = (config.useSmartContract == 'true') 
+const useSmartContract = (config.useSmartContract == 'true')
 const useReceiptVerification = (config.useReceiptVerification == 'true')
 const pickPointerSmartContract = require('./revenueSharing')
 
