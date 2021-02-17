@@ -1,205 +1,204 @@
 const ABI = [
 	{
-		inputs: [
+		"inputs": [
 			{
-				internalType: "string",
-				name: "paymentPointerName",
-				type: "string"
+				"internalType": "string",
+				"name": "paymentPointerName",
+				"type": "string"
 			},
 			{
-				internalType: "uint256",
-				name: "revShareValue",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "revShareValue",
+				"type": "uint256"
 			}
 		],
-		name: "add",
-		outputs: [
+		"name": "add",
+		"outputs": [
 			{
-				internalType: "uint256",
-				name: "size",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "size",
+				"type": "uint256"
 			}
 		],
-		stateMutability: "nonpayable",
-		type: "function"
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
-		inputs: [],
-		stateMutability: "nonpayable",
-		type: "constructor"
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	},
 	{
-		anonymous: false,
-		inputs: [
+		"anonymous": false,
+		"inputs": [
 			{
-				indexed: true,
-				internalType: "address",
-				name: "previousOwner",
-				type: "address"
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
 			},
 			{
-				indexed: true,
-				internalType: "address",
-				name: "newOwner",
-				type: "address"
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
 			}
 		],
-		name: "OwnershipTransferred",
-		type: "event"
+		"name": "OwnershipTransferred",
+		"type": "event"
 	},
 	{
-		inputs: [
+		"inputs": [
 			{
-				internalType: "uint256",
-				name: "key",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "key",
+				"type": "uint256"
 			}
 		],
-		name: "remove",
-		outputs: [
+		"name": "remove",
+		"outputs": [
 			{
-				internalType: "uint256",
-				name: "size",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "size",
+				"type": "uint256"
 			}
 		],
-		stateMutability: "nonpayable",
-		type: "function"
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
-		inputs: [
+		"inputs": [
 			{
-				internalType: "address",
-				name: "newOwner",
-				type: "address"
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
 			}
 		],
-		name: "transferOwnership",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function"
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
-		inputs: [],
-		name: "_owner",
-		outputs: [
+		"inputs": [],
+		"name": "_owner",
+		"outputs": [
 			{
-				internalType: "address",
-				name: "",
-				type: "address"
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
-		stateMutability: "view",
-		type: "function"
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-		inputs: [
+		"inputs": [
 			{
-				internalType: "uint256",
-				name: "index",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
 			}
 		],
-		name: "checkDataContains",
-		outputs: [
+		"name": "checkDataContains",
+		"outputs": [
 			{
-				internalType: "bool",
-				name: "",
-				type: "bool"
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
-		stateMutability: "view",
-		type: "function"
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-		inputs: [],
-		name: "getArraySize",
-		outputs: [
+		"inputs": [],
+		"name": "getArraySize",
+		"outputs": [
 			{
-				internalType: "uint256",
-				name: "",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
-		stateMutability: "view",
-		type: "function"
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-		inputs: [],
-		name: "getArrayStart",
-		outputs: [
+		"inputs": [],
+		"name": "getArrayStart",
+		"outputs": [
 			{
-				internalType: "uint256",
-				name: "",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
-		stateMutability: "view",
-		type: "function"
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-		inputs: [
+		"inputs": [
 			{
-				internalType: "uint256",
-				name: "index",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
 			}
 		],
-		name: "getOneEntry",
-		outputs: [
+		"name": "getOneEntry",
+		"outputs": [
 			{
-				internalType: "uint256",
-				name: "key",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "key",
+				"type": "uint256"
 			},
 			{
-				internalType: "uint256",
-				name: "value",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
 			},
 			{
-				internalType: "string",
-				name: "name",
-				type: "string"
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
 			}
 		],
-		stateMutability: "view",
-		type: "function"
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-		inputs: [],
-		name: "getTotalPercentage",
-		outputs: [
+		"inputs": [],
+		"name": "getTotalPercentage",
+		"outputs": [
 			{
-				internalType: "uint256",
-				name: "",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
-		stateMutability: "view",
-		type: "function"
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-		inputs: [
+		"inputs": [
 			{
-				internalType: "uint256",
-				name: "choice",
-				type: "uint256"
+				"internalType": "uint256",
+				"name": "choice",
+				"type": "uint256"
 			}
 		],
-		name: "pickPointer",
-		outputs: [
+		"name": "pickPointer",
+		"outputs": [
 			{
-				internalType: "string",
-				name: "paymentPointerName",
-				type: "string"
+				"internalType": "string",
+				"name": "paymentPointerName",
+				"type": "string"
 			}
 		],
-		stateMutability: "view",
-		type: "function"
+		"stateMutability": "view",
+		"type": "function"
 	}
 ]
 
-module.exports = {
-  ABI: ABI
-};
+
+module.exports = ABI
