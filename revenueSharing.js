@@ -8,18 +8,18 @@ var contract = new web3.eth.Contract(ABI, config.smartContract.address)
 
 const _pointer = async (useReceiptVerification) => {
   try {
-    console.log('Get total percentage')
     var totalPercentage = await contract.methods.getTotalPercentage().call()
   } catch (error) {
+    console.log('Total percentage error')
     console.log(error)
   }
   
   var randomNum = parseInt(Math.random() * totalPercentage)
   
   try {
-    console.log('Get pick pointer')
     var pointer = await contract.methods.pickPointer(randomNum).call()
   } catch (error) {
+    console.log('Pick pointer error')
     console.log(error)
   }
 
