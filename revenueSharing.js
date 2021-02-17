@@ -15,12 +15,13 @@ const _pointer = async (useReceiptVerification) => {
     console.log(error)
   }
   
-  var randomNum = parseInt(Math.random() * totalPercentage)
+  // Generate a number from 1 to totalPercentage
+  var randomNum = Math.floor(1 + Math.random() * totalPercentage)
+
   try {
     var pointer = await contract.methods.pickPointer(randomNum).call()
   } catch (error) {
     console.log('Pick pointer error')
-    console.log('Random Num = ', randomNum)
     console.log(error)
   }
 
