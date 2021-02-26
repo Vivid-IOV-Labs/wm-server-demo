@@ -14,7 +14,7 @@ const config = {
   smartContract: {
     provider: 'rinkeby',
     key: process.env.INFURA_KEY,
-    abiFilePath: './revenueSharingContract'
+    abiFilePath: './smartContractInfo'
   }
  };
  

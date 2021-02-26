@@ -5,7 +5,6 @@ var cors = require('cors')
 const config = require('./config')
 const wmRevenueShare = require('web-monetization-revenue-share')
 
-app.set('view engine', 'ejs')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
@@ -40,6 +39,7 @@ app.get('/', async function (req, res, next) {
     console.log('Revenue sharing active')
 
     const paymentPointerUrl = await wmRevenueShare.pointerUrl()
+    console.log(`Payment pointer: ${paymentPointerUrl}`)
 
     // redirect to our chosen payment pointer so they get paid
     res.redirect(302, paymentPointerUrl)
