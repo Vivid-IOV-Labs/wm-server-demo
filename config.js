@@ -12,8 +12,8 @@ const config = {
     verifier: 'https://webmonetization.org/api/receipts/verify'
   },
   smartContract: {
-    provider: `wss://rinkeby.infura.io/ws/v3/${process.env.INFURA_KEY}`,
-    address: '0x99deC650eb882c522ef49a5002Ff11fEdF5A146c',
+    provider: 'rinkeby',
+    key: process.env.INFURA_KEY,
     abiFilePath: './revenueSharingContract'
   }
  };

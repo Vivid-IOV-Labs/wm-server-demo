@@ -1,15 +1,9 @@
 var express = require('express');
 var app = express();
-// var path = require('path');
 const fetch = require("node-fetch");
 var cors = require('cors')
 const config = require('./config')
-
-var wmRevenueShare = require('web-monetization-revenue-share')
-wmRevenueShare.setUp('/config')
-
-
-
+const wmRevenueShare = require('web-monetization-revenue-share')
 
 app.set('view engine', 'ejs')
 app.use(express.json());
@@ -21,6 +15,7 @@ app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`);
 });
 
+wmRevenueShare.setUp('./config')
 
 app.post('/verifyReceipt', async (req, res) => {
   const resp = await fetch(config.receiptVerification.verifier, {
@@ -37,7 +32,6 @@ app.post('/verifyReceipt', async (req, res) => {
   // backend logic for new paid amount
 
 })
-
 
 app.get('/', async function (req, res, next) {
   // is this request meant for Web Monetization?

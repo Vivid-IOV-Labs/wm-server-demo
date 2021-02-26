@@ -22,7 +22,7 @@
 
   <!-- <meta name="monetization" content="$localhost:1337/">   -->
   <!-- <meta name="monetization" content="https://web-monetization-server-test.herokuapp.com/">   -->
-  <meta name="monetization" content="https://revsharetest.peerkat.live/">  
+  <meta name="monetization" content="https://revsharetest.peerkat.live/">
   <!-- <meta name="monetization" content="$revshare.peerkat.live">   -->
 
   <!-- <meta name="monetization" content="https://webmonetization.org/api/receipts/%24ilp.uphold.com%2FfH9eZNdYQ64F"> -->
@@ -39,17 +39,17 @@
         // Connect to your site’s backend to validate the payment. This does NOT connect directly to the receipt verifier.
         try {
           const res = await fetch('https://revsharetest.peerkat.live/verifyReceipt', {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify({
-            receipt: event.detail.receipt
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+              receipt: event.detail.receipt
+            })
           })
-        })
-      } catch(error) {
-        console.log(error)
-      }
+        } catch (error) {
+          console.log(error)
+        }
       })
     }
   </script>
