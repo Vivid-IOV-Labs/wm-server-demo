@@ -4,7 +4,7 @@ const config = {
   server: {
     port: process.env.PORT || 1337
   },
-  useSmartContract: process.env.USE_SMART_CONTRACT || 'false',
+  useSmartContract: process.env.USE_SMART_CONTRACT || 'true',
   useReceiptVerification: process.env.USE_RECEIPT_VERIFICATION || 'true',
   paymentPointersPath: './paymentPointers',
   receiptVerification:{ 
