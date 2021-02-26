@@ -21,15 +21,6 @@ app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`);
 });
 
-temp = async () => {
-
-  // wmRevenueShare.setUp('/config')
-  // console.log(wmRevenueShare)
-  var paymentPointerUrl = await wmRevenueShare.pointerUrl()
-  console.log(paymentPointerUrl)
-}
-
-temp()
 
 app.post('/verifyReceipt', async (req, res) => {
   const resp = await fetch(config.receiptVerification.verifier, {
