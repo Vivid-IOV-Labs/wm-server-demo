@@ -22,9 +22,15 @@ app.post('/verifyReceipt', async (req, res) => {
     body: req.body.receipt
   })
   try {
-    const { amount } = await resp.json()
-    console.log('Received ' + amount)
-    res.send({ message: 'ok', data: { received: amount } })
+    const { amount, spspEndpoint } = await resp.json()
+    console.log(`Received: ${amount}`)
+    res.send({
+      message: 'ok',
+      data: {
+        received: amount,
+        paymentPointer: spspEndpoint
+      }
+    })
   } catch (error) {
     res.status(400).send(error)
   }
@@ -34,7 +40,7 @@ app.post('/verifyReceipt', async (req, res) => {
 
 app.get('/', async function (req, res, next) {
   // is this request meant for Web Monetization?
-  
+
   if (req.header('accept').includes('application/spsp4+json')) {
     console.log('Revenue sharing active')
 
