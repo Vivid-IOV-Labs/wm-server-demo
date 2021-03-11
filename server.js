@@ -44,7 +44,7 @@ app.get('/', async function (req, res, next) {
   if (req.header('accept').includes('application/spsp4+json')) {
     console.log('Revenue sharing active')
 
-    const paymentPointerUrl = await wmRevenueShare.pointerUrl()
+    const paymentPointerUrl = await wmRevenueShare.getPointerUrl()
     console.log(`Payment pointer: ${paymentPointerUrl}`)
 
     // redirect to our chosen payment pointer so they get paid
