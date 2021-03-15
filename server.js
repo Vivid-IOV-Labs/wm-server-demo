@@ -40,6 +40,12 @@ app.post('/verifyReceipt', async (req, res) => {
 
 app.get('/', async function (req, res, next) {
   // is this request meant for Web Monetization?
+  
+  if (!req.header('accept')) {
+    console.log('Req Header accept not found.')
+    console.log(req.header)
+    next()
+  }
 
   if (req.header('accept').includes('application/spsp4+json')) {
     console.log('Revenue sharing active')
