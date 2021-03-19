@@ -3,12 +3,17 @@
  
 #### Test Heroku instanse locally.
   
-    node serverTestHeroku.js
+  - Replace `https://revsharetest.peerkat.live/` in `views/indexTestHeroku.ejs` with the url of your deployed server instance. <br>
+    For example:
 
-  visit `http://localhost:1337` it will use `views/indexTestHeroku.ejs`
+        ...
+        <meta name="monetization" content="https://your-deployed-server-instance-url/">
+        ...
+        const res = await fetch('https://your-deployed-server-instance-url/verifyReceipt', {
+        ...
 
-#### Test as if the heroku instanse is local
+  - Start local server 
+  
+      node serverTestHeroku.js
 
-    node serverLocal.js
-
-  visit `http://localhost:1337` it will use `views/serverLocal.ejs`
+  - visit `http://localhost:1337`
